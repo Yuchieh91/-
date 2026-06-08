@@ -65,13 +65,13 @@
             font-weight: 300;
         }
 
-        /* 🛠️ 2. 改為灰色方框、淡淡灰色背景的播放按鈕 */
+        /* 灰色方框、淡淡灰色背景的播放按鈕 */
         .play-btn-box {
             padding: 12px 36px;
-            background: rgba(255, 255, 255, 0.04); /* 淡淡的灰色背景 */
+            background: rgba(255, 255, 255, 0.04);
             color: #94a3b8;
-            border: 1px solid #475569; /* 灰色的方框 */
-            border-radius: 6px; /* 微圓角方框 */
+            border: 1px solid #475569;
+            border-radius: 6px;
             font-size: 1.4rem;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -130,7 +130,7 @@
             margin: 30px 0;
         }
 
-        /* 🛠️ 3. 「她，會同意嗎？」顏色改成跟 OS 一樣的藍灰色 (#94a3b8) */
+        /* 「她，會同意嗎？」藍灰色質感大字 */
         p.mid-large-text {
             font-size: 2.2rem;
             color: #94a3b8;
@@ -139,11 +139,11 @@
             margin: 60px 0;
         }
 
-        /* 🛠️ 4. 拿掉紅色虛線框、縮小字體至 1.55rem 以利排成 2 排 */
-        p.super-final-text {
+        /* 拿掉紅色虛線框、縮小字體至 1.55rem 的終幕文字 */
+        .super-final-text {
             font-size: 1.55rem;
             line-height: 1.9;
-            color: #ffffff; /* 顏色照舊 */
+            color: #ffffff;
             font-weight: bold;
             text-align: center;
             margin: 80px 0 40px 0;
@@ -222,7 +222,7 @@
     <div id="cover-screen">
         <div class="cover-content">
             <h1 class="cover-title">她該留下，還是離開？</h1>
-            <p class="cover-subtitle">206 汪郁捷 郭亮祈 鄭宇庭 </p>
+            <p class="cover-subtitle">206 汪郁捷 郭亮祈 鄭宇庭</p>
             
             <button class="play-btn-box" onclick="startGame(event)">▶</button>
         </div>
@@ -242,14 +242,14 @@
                 { type: "text", content: "高一時，她認識了同班的小晴。" },
                 { type: "text", content: "兩人從一開始一起吃午餐、一起搭公車上學，到後來每天都聊天聊到深夜。" },
                 { type: "text", content: "小芸把小晴當作最好的朋友，但漸漸地，她發現小晴會因為她和他人互動而吃醋。" },
-                { type: "image", content: "img1.jpg.jpeg" }, 
+                { type: "image", content: "img1.jpg" }, 
                 { type: "text", content: "小芸不懂她們目前的關係到底該如何定義，從前單純的擁抱、牽手也彷彿有了別的意涵。" },
                 { type: "text", content: "直到一次演講，主持人在最後要結尾時說請各位和最想感謝的人打電話，這時雙方心裡都浮現了對方的身影。" },
                 { type: "text", content: "還在恍神時，小芸身旁內向的同學拿起了手機，聲音顫抖地打給了學妹，向學妹告白。" },
                 { type: "text", content: "小芸和小晴都很驚訝，卻又有種恍然大悟的感覺。告白的結果沒有人記得，腦中只有一個想法：原來她們的關係也可以不只是朋友。" },
-                { type: "image", content: "img2.jpg.jpeg" }, 
+                { type: "image", content: "img2.jpg" }, 
                 { type: "text", content: "小芸發現小晴確實不一樣，早在因為小晴的笑容而怦然時她就應該發現的。" },
-                { type: "image", content: "img3.jpg.jpeg" }, 
+                { type: "image", content: "img3.jpg" }, 
                 { type: "text", content: "但她不確定小晴是不是有一樣的想法，也怕同性戀的身份不被周圍的人所接受。" },
                 { type: "highlight", content: "「我應該告白嗎！？」" },
                 { type: "choice" }
@@ -258,11 +258,11 @@
             branch_yes: [
                 { type: "text", content: "小芸和廣大朋友們討論後還是決定勇敢一次，畢竟遇到喜歡的人也不容易。" },
                 { type: "text", content: "一下課她就開始規劃，先是去一中街訂了和小晴相襯的向日葵，和她說好看卻一直捨不得買的連身裙，再去墊腳石選了一張卡片，再急匆匆地跑去補習。" },
-                { type: "image", content: "img4.jpg.jpeg" }, 
+                { type: "image", content: "img4.jpg" }, 
                 { type: "text", content: "坐公車回到家時難得的精神很好，先是飛快地完成卡片，好像她早就知道該怎麼寫了一樣。" },
                 { type: "text", content: "再傳訊息問小晴6/7要不要一起吃飯。" },
-                { type: "image", content: "img5.jpg.jpeg" }, 
-                { type: "image", content: "img6.jpg.jpeg" }, 
+                { type: "image", content: "img5.jpg" }, 
+                { type: "image", content: "img6.jpg" }, 
                 { type: "highlight", content: "「她答應了！！」" },
                 { type: "text", content: "於是，在充滿意義的6/7，小芸告白了。" }
             ],
@@ -270,15 +270,12 @@
             branch_no: [
                 { type: "text", content: "在和好朋友們討論後，小芸決定收起這份心意，當朋友已經夠幸運了。" },
                 { type: "text", content: "但和小晴的肢體接觸卻讓她很苦惱，她一邊享受這種親密，一邊覺得懷著別樣心思的自己很齷齪。" },
-                { type: "image", content: "img7.jpg.jpeg" }, 
-                { type: "text", content: "...在和好朋友們討論後，小芸決定收起這份心意，當朋友已經夠幸運了。" },
-                { type: "text", content: "但和小晴的肢體接觸卻讓她很苦惱，她一邊享受這種親密，一邊覺得懷著別樣心思的自己很齷齪。" },
-                { type: "image", content: "img7.jpg.jpeg" }, 
+                { type: "image", content: "img7.jpg" }, 
                 { type: "text", content: "這份不可告人的曖昧只持續到6/7，小晴約她去一中吃飯的那天……" },
                 { type: "text", content: "小芸原本以為小晴只是和平常一樣搞抽象" },
-                { type: "image", content: "img8.jpg.jpeg" }, 
+                { type: "image", content: "img8.jpg" }, 
                 { type: "text", content: "沒想到小晴竟然拿出了他一直很想要的盧媽媽頭套，和一束她喜歡的雛菊，彆扭地告白。" },
-                { type: "image", content: "img9.jpg.jpeg" }, 
+                { type: "image", content: "img9.jpg" }, 
                 { type: "text", content: "小芸以為將無疾而終的初戀突然漲停板，一時間愣住了……" }
             ],
 
@@ -294,9 +291,9 @@
                 { type: "text", content: "有一次，兩人在電話裡沉默了很久。" },
                 { type: "text", content: "掛斷後，小芸忍不住思考：" },
                 { type: "highlight", content: "「我現在真的快樂嗎？」" },
-                { type: "image", content: "img11.jpg.jpeg" }, 
+                { type: "image", content: "img11.jpg" }, 
                 { type: "text", content: "她開始回想這段關係。" },
-                { type: "text", content: "如果繼續下去，她可能要花更多時間安撫對方、協調彼此的期待，也可能因此減少準備考試和参加活動的時間。" },
+                { type: "text", content: "如果繼續下去，她可能要花更多時間安撫對方、協調彼此的期待，也可能因此減少準備考試和參加活動的時間。" },
                 { type: "text", content: "但如果選擇離開，她又會失去曾經最親密的人。" },
                 { type: "text", content: "更重要的是，她們已經在一起快兩年了。" },
                 { type: "text", content: "想到一起看過的電影、一起慶祝過的生日、一起寫過的卡片，小芸就覺得很難放手。" },
@@ -354,7 +351,7 @@
                 if (step.type === "text") wrapper.innerHTML = `<p class="story-text">${step.content}</p>`;
                 else if (step.type === "highlight") wrapper.innerHTML = `<p class="highlight-text">${step.content}</p>`;
                 else if (step.type === "large") wrapper.innerHTML = `<p class="mid-large-text">${step.content}</p>`;
-                else if (step.type === "super-final") wrapper.innerHTML = `<p class="super-final-text">${step.content.replace('\n', '<br>')}</p>`;
+                else if (step.type === "super-final") wrapper.innerHTML = `<p class="super-final-text">${step.content.replace(/\n/g, '<br>')}</p>`;
                 else if (step.type === "image") wrapper.innerHTML = `<div class="image-container"><img src="${step.content}" alt="故事插圖"></div>`;
                 storyBody.appendChild(wrapper);
                 currentIndex++;
