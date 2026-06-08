@@ -25,11 +25,76 @@
             width: 100%;
         }
 
+        /* ================= 🆕 新增：故事播放封面樣式 ================= */
+        #cover-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #0b0f19; /* 配合妳的背景色 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999; /* 確保疊在最上層 */
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+
+        /* 隱藏封面時的淡出動畫 */
+        #cover-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .cover-content {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .cover-title {
+            font-size: 2.6rem;
+            color: #ffffff;
+            margin-bottom: 15px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+        }
+
+        .cover-subtitle {
+            font-size: 1.1rem;
+            color: #64748b;
+            margin-bottom: 45px;
+            letter-spacing: 1px;
+        }
+
+        /* 播放大按鈕：靛藍色漸層高級感 */
+        .play-btn {
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            color: white;
+            border: none;
+            padding: 16px 48px;
+            font-size: 1.35rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 25px rgba(99, 102, 241, 0.35);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .play-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 6px 30px rgba(99, 102, 241, 0.55);
+        }
+        /* ========================================================== */
+
         /* 標題樣式 */
         .story-title {
             text-align: center;
             font-size: 2rem;
-            color: #f43f5e;
+            color:#D0D0D0 ;
             margin-bottom: 40px;
             font-weight: bold;
             letter-spacing: 2px;
@@ -60,10 +125,10 @@
             letter-spacing: 0.5px;
         }
 
-        /* 心中OS/對話 強調字 */
+        /* 心中OS/對話 強調字（🛠️ 已修復隱形字元與亮灰色） */
         p.highlight-text {
             font-size: 1.35rem;
-            color: #38bdf8;
+            color: #94a3b8;
             font-weight: bold;
             text-align: center;
             margin: 30px 0;
@@ -100,7 +165,7 @@
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 20 rgba(244, 63, 94, 0.2);
+            box-shadow: 0 4px 20px rgba(244, 63, 94, 0.2);
         }
 
         .btn-yes {
@@ -166,6 +231,16 @@
 </head>
 <body>
 
+    <div id="cover-screen">
+        <div class="cover-content">
+            <h1 class="cover-title">她該留下，還是離開？</h1>
+            <p class="cover-subtitle">公民學習歷程 · 互動式焦點報告</p>
+            <button class="play-btn" onclick="startGame(event)">
+                <span>▶</span> 開始故事
+            </button>
+        </div>
+    </div>
+
     <div class="container">
         <div class="story-title">她該留下，還是離開？</div>
         <div id="story-body"></div>
@@ -174,7 +249,6 @@
     <div class="click-hint" id="hint-text">點擊螢幕任意處繼續...</div>
 
     <script>
-        // 【已自動校正為 .jpg.jpeg 副檔名】
         const storyData = {
             intro: [
                 { type: "text", content: "小芸是一所女校的高二學生。" },
@@ -334,8 +408,18 @@
             showNextStep();
         }
 
-        document.addEventListener('click', showNextStep);
-        showNextStep();
+        /* 🆕 新增：點擊播放鍵後的驅動機制 */
+        function startGame(event) {
+            event.stopPropagation(); // 阻止事件干擾
+            document.getElementById('cover-screen').classList.add('hidden'); // 淡出隱藏封面
+            
+            showNextStep(); // 秀出第一句故事文字
+            
+            // 延遲 100 毫秒再啟動螢幕全域點擊，避免當次點擊造成故事暴衝跑兩句
+            setTimeout(() => {
+                document.addEventListener('click', showNextStep);
+            }, 100);
+        }
     </script>
 </body>
 </html>
