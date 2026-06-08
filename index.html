@@ -25,7 +25,7 @@
             width: 100%;
         }
 
-        /* ================= 🎬 封面與圓形播放鍵樣式 ================= */
+        /* ================= 🎬 封面與灰色方框播放鍵樣式 ================= */
         #cover-screen {
             position: fixed;
             top: 0;
@@ -65,30 +65,26 @@
             font-weight: 300;
         }
 
-        /* 圓形播放按鈕 */
-        .play-btn-circle {
-            width: 90px;
-            height: 90px;
-            background: rgba(255, 255, 255, 0.05);
-            color: white;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            font-size: 2rem;
+        /* 🛠️ 2. 改為灰色方框、淡淡灰色背景的播放按鈕 */
+        .play-btn-box {
+            padding: 12px 36px;
+            background: rgba(255, 255, 255, 0.04); /* 淡淡的灰色背景 */
+            color: #94a3b8;
+            border: 1px solid #475569; /* 灰色的方框 */
+            border-radius: 6px; /* 微圓角方框 */
+            font-size: 1.4rem;
             cursor: pointer;
-            display: flex;
+            transition: all 0.3s ease;
+            display: inline-flex;
             justify-content: center;
             align-items: center;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             margin: 0 auto;
-            padding-left: 5px; /* 微調三角形視覺中心 */
         }
 
-        .play-btn-circle:hover {
-            transform: scale(1.15);
+        .play-btn-box:hover {
             background: rgba(255, 255, 255, 0.1);
-            border-color: #6C6C6C;
-            color: #6C6C6C;
-            box-shadow: 0 0 30px rgba(99, 102, 241, 0.3);
+            border-color: #94a3b8;
+            color: #ffffff;
         }
         /* ========================================================== */
 
@@ -134,6 +130,28 @@
             margin: 30px 0;
         }
 
+        /* 🛠️ 3. 「她，會同意嗎？」顏色改成跟 OS 一樣的藍灰色 (#94a3b8) */
+        p.mid-large-text {
+            font-size: 2.2rem;
+            color: #94a3b8;
+            font-weight: bold;
+            text-align: center;
+            margin: 60px 0;
+        }
+
+        /* 🛠️ 4. 拿掉紅色虛線框、縮小字體至 1.55rem 以利排成 2 排 */
+        p.super-final-text {
+            font-size: 1.55rem;
+            line-height: 1.9;
+            color: #ffffff; /* 顏色照舊 */
+            font-weight: bold;
+            text-align: center;
+            margin: 80px 0 40px 0;
+            border: none;
+            padding: 0;
+            background-color: transparent;
+        }
+
         /* 圖片容器 */
         .image-container {
             text-align: center;
@@ -148,7 +166,7 @@
             border: 1px solid #1e293b;
         }
 
-        /* 抉擇按鈕區塊 (妳修改後的超美漸層版) */
+        /* 抉擇按鈕區塊 */
         .btn-container {
             display: flex;
             justify-content: center;
@@ -178,26 +196,12 @@
         }
         .btn-no:hover { transform: scale(1.05); box-shadow: 0 6px 25px rgba(248, 113, 113, 0.4); }
 
-        /* 中間轉折與結局大字 */
-        p.mid-large-text {
-            font-size: 2.2rem;
-            color: #fbbf24;
-            font-weight: bold;
+        .choice-selected {
             text-align: center;
-            margin: 60px 0;
-        }
-
-        p.super-final-text {
-            font-size: 2.5rem;
-            line-height: 1.6;
-            color: #ffffff;
-            font-weight: bold;
-            text-align: center;
-            margin: 80px 0 40px 0;
-            border: 2px dashed #f43f5e;
-            padding: 30px 20px;
-            border-radius: 16px;
-            background-color: #111827;
+            color: #64748b;
+            font-style: italic;
+            font-size: 1.1rem;
+            margin: 25px 0;
         }
 
         .click-hint {
@@ -220,7 +224,7 @@
             <h1 class="cover-title">她該留下，還是離開？</h1>
             <p class="cover-subtitle">206 汪郁捷 郭亮祈 鄭宇庭 </p>
             
-            <button class="play-btn-circle" onclick="startGame(event)">▶</button>
+            <button class="play-btn-box" onclick="startGame(event)">▶</button>
         </div>
     </div>
 
@@ -267,6 +271,9 @@
                 { type: "text", content: "在和好朋友們討論後，小芸決定收起這份心意，當朋友已經夠幸運了。" },
                 { type: "text", content: "但和小晴的肢體接觸卻讓她很苦惱，她一邊享受這種親密，一邊覺得懷著別樣心思的自己很齷齪。" },
                 { type: "image", content: "img7.jpg.jpeg" }, 
+                { type: "text", content: "...在和好朋友們討論後，小芸決定收起這份心意，當朋友已經夠幸運了。" },
+                { type: "text", content: "但和小晴的肢體接觸卻讓她很苦惱，她一邊享受這種親密，一邊覺得懷著別樣心思的自己很齷齪。" },
+                { type: "image", content: "img7.jpg.jpeg" }, 
                 { type: "text", content: "這份不可告人的曖昧只持續到6/7，小晴約她去一中吃飯的那天……" },
                 { type: "text", content: "小芸原本以為小晴只是和平常一樣搞抽象" },
                 { type: "image", content: "img8.jpg.jpeg" }, 
@@ -289,7 +296,7 @@
                 { type: "highlight", content: "「我現在真的快樂嗎？」" },
                 { type: "image", content: "img11.jpg.jpeg" }, 
                 { type: "text", content: "她開始回想這段關係。" },
-                { type: "text", content: "如果繼續下去，她可能要花更多時間安撫對方、協調彼此的期待，也可能因此減少準備考試和參加活動的時間。" },
+                { type: "text", content: "如果繼續下去，她可能要花更多時間安撫對方、協調彼此的期待，也可能因此減少準備考試和参加活動的時間。" },
                 { type: "text", content: "但如果選擇離開，她又會失去曾經最親密的人。" },
                 { type: "text", content: "更重要的是，她們已經在一起快兩年了。" },
                 { type: "text", content: "想到一起看過的電影、一起慶祝過的生日、一起寫過的卡片，小芸就覺得很難放手。" },
@@ -307,7 +314,7 @@
                 { type: "text", content: "分手那天，小芸哭得很傷心。" },
                 { type: "text", content: "但幾個月後，她發現自己有更多時間投入喜歡的事情，也慢慢找回了原本的生活節奏。" },
                 { type: "text", content: "直到那時候，她才明白：" },
-                { type: "super-final", content: "有些選擇之所以困難，不是因為不知道答案，而是因為放下曾經投入的一切，需要很大的勇氣。" }
+                { type: "super-final", content: "有些選擇之所以困難，不是因為不知道答案，\n而是因為放下曾經投入的一切，需要很大的勇氣。" }
             ]
         };
 
@@ -347,7 +354,7 @@
                 if (step.type === "text") wrapper.innerHTML = `<p class="story-text">${step.content}</p>`;
                 else if (step.type === "highlight") wrapper.innerHTML = `<p class="highlight-text">${step.content}</p>`;
                 else if (step.type === "large") wrapper.innerHTML = `<p class="mid-large-text">${step.content}</p>`;
-                else if (step.type === "super-final") wrapper.innerHTML = `<p class="super-final-text">${step.content}</p>`;
+                else if (step.type === "super-final") wrapper.innerHTML = `<p class="super-final-text">${step.content.replace('\n', '<br>')}</p>`;
                 else if (step.type === "image") wrapper.innerHTML = `<div class="image-container"><img src="${step.content}" alt="故事插圖"></div>`;
                 storyBody.appendChild(wrapper);
                 currentIndex++;
