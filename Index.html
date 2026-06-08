@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>公民報告：她該留下，還是離開？</title>
+    <style>
+        body {
+            background-color: #0c0d14;
+            color: #e2e8f0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Microsoft JhengHei", sans-serif;
+            margin: 0;
+            padding: 80px 20px 200px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+            cursor: pointer; /* 讓滑鼠變成手指，提示可以點擊 */
+        }
+
+        .container {
+            max-width: 650px;
+            width: 100%;
+        }
+
+        h1.story-title {
+            text-align: center;
+            font-size: 2rem;
+            color: #ffffff;
+            margin-bottom: 60px;
+            letter-spacing: 0.1em;
+        }
+
+        .fade-item {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            margin-bottom: 24px;
+        }
+
+        .fade-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        p.story-text {
+            font-size: 1.2rem;
+            line-height: 2;
+            color: #cbd5e1;
+            text-align: justify;
+            letter-spacing: 0.05em;
+            margin: 0;
+        }
+
+        p.highlight-text {
+            font-size: 1.4rem;
+            color: #f43f5e;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .click-hint {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-size: 0.85rem;
+            color: #475569;
+            background-color: #161722;
+            padding: 6px 14px;
+            border-radius: 20px;
+            pointer-events: none;
+            border: 1px solid #1e1b4b;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="story-title">她該留下，還是離開？</h1>
+        <div id="story-body"></div>
+    </div>
+
+    <div class="click-hint" id="hint-text">點擊螢幕任意處進下一段...</div>
+
+    <script>
+        // 【劇本控制台】你想按幾下、每一次要吐出多少字，都在這裡自由切分：
+        const storySteps = [
+            { type: "text", content: "小芸是一所女校的高二學生。" },
+            { type: "text", content: "高一時，她認識了同班的小晴。" },
+            { type: "text", content: "兩人從一開始一起吃午餐、一起搭公車回家，到後來每天都聊天聊到深夜。漸漸地，她們發現自己對彼此的感情已經超越了一般朋友。" },
+            { type: "text", content: "於是，她們開始交往。" },
+            { type: "text", content: "剛開始的日子很幸福。" },
+            { type: "text", content: "考試失利時有人安慰，心情不好時有人陪伴，就連平凡的上學日也變得特別期待。" },
+            { type: "text", content: "然而，升上高二後，一切開始改變。" },
+            { type: "text", content: "小芸希望把更多時間放在課業和準備未來的大學申請上，但小晴則認為，既然是情侶，就應該把彼此放在第一順位。" },
+            { type: "text", content: "當小芸留在圖書館讀書時，小晴會失落；當小芸忙著準備報告沒有回訊息時，小晴又覺得自己被忽略。" },
+            { type: "text", content: "兩人的爭吵越來越頻繁。" },
+            { type: "text", content: "有一次，兩人在電話裡沉默了很久。" },
+            { type: "text", content: "掛斷後，小芸忍不住思考：" },
+            { type: "final", content: "「我現在真的快樂嗎？」" }
+        ];
+
+        const storyBody = document.getElementById('story-body');
+        const hintText = document.getElementById('hint-text');
+        let currentIndex = 0;
+
+        function showNextStep() {
+            if (currentIndex < storySteps.length) {
+                const step = storySteps[currentIndex];
+                const wrapper = document.createElement('div');
+                wrapper.className = 'fade-item';
+
+                if (step.type === "text") {
+                    wrapper.innerHTML = `<p class="story-text">${step.content}</p>`;
+                } else if (step.type === "final") {
+                    wrapper.innerHTML = `<p class="highlight-text">${step.content}</p>`;
+                }
+
+                storyBody.appendChild(wrapper);
+
+                setTimeout(() => {
+                    wrapper.classList.add('visible');
+                    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+                }, 50);
+
+                currentIndex++;
+                
+                if (currentIndex === storySteps.length) {
+                    hintText.innerText = "故事結束";
+                }
+            }
+        }
+
+        // 偵測滑鼠點擊
+        document.addEventListener('click', showNextStep);
+
+        // 一打開網頁先自動秀出第一句
+        showNextStep();
+    </script>
+</body>
+</html>
