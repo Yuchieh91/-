@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>公民學習歷程報告：她該留下，還是離開？</title>
+    <title>公民報告：她該留下，還是離開？</title>
     <style>
         body {
             background-color: #0b0f19;
@@ -25,22 +25,21 @@
             width: 100%;
         }
 
-        /* ================= 🆕 新增：故事播放封面樣式 ================= */
+        /* ================= 🎬 封面與圓形播放鍵樣式 ================= */
         #cover-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: #0b0f19; /* 配合妳的背景色 */
+            background-color: #0b0f19;
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 9999; /* 確保疊在最上層 */
-            transition: opacity 0.6s ease, visibility 0.6s ease;
+            z-index: 9999;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
         }
 
-        /* 隱藏封面時的淡出動畫 */
         #cover-screen.hidden {
             opacity: 0;
             visibility: hidden;
@@ -48,53 +47,56 @@
 
         .cover-content {
             text-align: center;
-            padding: 20px;
         }
 
         .cover-title {
-            font-size: 2.6rem;
+            font-size: 2.8rem;
             color: #ffffff;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             font-weight: bold;
-            letter-spacing: 3px;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+            letter-spacing: 4px;
         }
 
         .cover-subtitle {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: #64748b;
-            margin-bottom: 45px;
-            letter-spacing: 1px;
+            margin-bottom: 60px;
+            letter-spacing: 2px;
+            font-weight: 300;
         }
 
-        /* 播放大按鈕：靛藍色漸層高級感 */
-        .play-btn {
-            background: linear-gradient(135deg, #6366f1, #4f46e5);
+        /* 圓形播放按鈕 */
+        .play-btn-circle {
+            width: 90px;
+            height: 90px;
+            background: rgba(255, 255, 255, 0.05);
             color: white;
-            border: none;
-            padding: 16px 48px;
-            font-size: 1.35rem;
-            font-weight: bold;
-            border-radius: 50px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            font-size: 2rem;
             cursor: pointer;
-            box-shadow: 0 4px 25px rgba(99, 102, 241, 0.35);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            display: inline-flex;
+            display: flex;
+            justify-content: center;
             align-items: center;
-            gap: 12px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin: 0 auto;
+            padding-left: 5px; /* 微調三角形視覺中心 */
         }
 
-        .play-btn:hover {
-            transform: scale(1.08);
-            box-shadow: 0 6px 30px rgba(99, 102, 241, 0.55);
+        .play-btn-circle:hover {
+            transform: scale(1.15);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #6C6C6C;
+            color: #6C6C6C;
+            box-shadow: 0 0 30px rgba(99, 102, 241, 0.3);
         }
         /* ========================================================== */
 
-        /* 標題樣式 */
+        /* 故事內文標題樣式 */
         .story-title {
             text-align: center;
             font-size: 2rem;
-            color:#D0D0D0 ;
+            color: #ADADAD;
             margin-bottom: 40px;
             font-weight: bold;
             letter-spacing: 2px;
@@ -115,24 +117,21 @@
             transform: translateY(0);
         }
 
-        /* 內文文字風格 */
         p.story-text {
             font-size: 1.2rem;
             line-height: 2.1;
             color: #cbd5e1;
             text-align: justify;
             margin: 0;
-            letter-spacing: 0.5px;
         }
 
-        /* 心中OS/對話 強調字（🛠️ 已修復隱形字元與亮灰色） */
+        /* 心中OS強調字 */
         p.highlight-text {
             font-size: 1.35rem;
             color: #94a3b8;
             font-weight: bold;
             text-align: center;
             margin: 30px 0;
-            letter-spacing: 1px;
         }
 
         /* 圖片容器 */
@@ -149,7 +148,7 @@
             border: 1px solid #1e293b;
         }
 
-        /* 抉擇按鈕區塊 */
+        /* 抉擇按鈕區塊 (妳修改後的超美漸層版) */
         .btn-container {
             display: flex;
             justify-content: center;
@@ -165,7 +164,6 @@
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 20px rgba(244, 63, 94, 0.2);
         }
 
         .btn-yes {
@@ -180,25 +178,15 @@
         }
         .btn-no:hover { transform: scale(1.05); box-shadow: 0 6px 25px rgba(248, 113, 113, 0.4); }
 
-        .choice-selected {
-            text-align: center;
-            color: #94a3b8;
-            font-style: italic;
-            font-size: 1.1rem;
-            margin: 25px 0;
-        }
-
-        /* 中間轉折大字 */
+        /* 中間轉折與結局大字 */
         p.mid-large-text {
             font-size: 2.2rem;
             color: #fbbf24;
             font-weight: bold;
             text-align: center;
             margin: 60px 0;
-            text-shadow: 0 0 15px rgba(251, 191, 36, 0.3);
         }
 
-        /* 最終震撼結局大字 */
         p.super-final-text {
             font-size: 2.5rem;
             line-height: 1.6;
@@ -206,14 +194,12 @@
             font-weight: bold;
             text-align: center;
             margin: 80px 0 40px 0;
-            text-shadow: 0 0 25px rgba(255, 255, 255, 0.5);
             border: 2px dashed #f43f5e;
             padding: 30px 20px;
             border-radius: 16px;
             background-color: #111827;
         }
 
-        /* 手機底端提示 */
         .click-hint {
             position: fixed;
             bottom: 25px;
@@ -224,8 +210,6 @@
             padding: 8px 18px;
             border-radius: 20px;
             pointer-events: none;
-            border: 1px solid #1e293b;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
         }
     </style>
 </head>
@@ -234,10 +218,9 @@
     <div id="cover-screen">
         <div class="cover-content">
             <h1 class="cover-title">她該留下，還是離開？</h1>
-            <p class="cover-subtitle">公民學習歷程 · 互動式焦點報告</p>
-            <button class="play-btn" onclick="startGame(event)">
-                <span>▶</span> 開始故事
-            </button>
+            <p class="cover-subtitle">206 汪郁捷 郭亮祈 鄭宇庭 </p>
+            
+            <button class="play-btn-circle" onclick="startGame(event)">▶</button>
         </div>
     </div>
 
@@ -263,7 +246,7 @@
                 { type: "image", content: "img2.jpg.jpeg" }, 
                 { type: "text", content: "小芸發現小晴確實不一樣，早在因為小晴的笑容而怦然時她就應該發現的。" },
                 { type: "image", content: "img3.jpg.jpeg" }, 
-                { type: "text", content: "But她不確定小晴是不是有一樣的想法，也怕同性戀的身份不被周圍的人所接受。" },
+                { type: "text", content: "但她不確定小晴是不是有一樣的想法，也怕同性戀的身份不被周圍的人所接受。" },
                 { type: "highlight", content: "「我應該告白嗎！？」" },
                 { type: "choice" }
             ],
@@ -276,7 +259,7 @@
                 { type: "text", content: "再傳訊息問小晴6/7要不要一起吃飯。" },
                 { type: "image", content: "img5.jpg.jpeg" }, 
                 { type: "image", content: "img6.jpg.jpeg" }, 
-                { type: "highlight", content: "「他答應了！！」" },
+                { type: "highlight", content: "「她答應了！！」" },
                 { type: "text", content: "於是，在充滿意義的6/7，小芸告白了。" }
             ],
 
@@ -336,9 +319,7 @@
 
         function showNextStep() {
             if (isWaitingForChoice) return;
-
             let steps = storyData[currentPath];
-
             if (currentIndex >= steps.length) {
                 if (currentPath === "branch_yes" || currentPath === "branch_no") {
                     currentPath = "main_story";
@@ -346,7 +327,6 @@
                     steps = storyData[currentPath];
                 } else {
                     hintText.innerText = "報告結束。點擊可重頭播放";
-                    hintText.style.color = "#f43f5e";
                     currentPath = "intro";
                     currentIndex = 0;
                     storyBody.innerHTML = "";
@@ -354,41 +334,24 @@
                     return;
                 }
             }
-
             const step = steps[currentIndex];
             const wrapper = document.createElement('div');
             wrapper.className = 'fade-item';
-            
             if (step.type === "choice") {
                 isWaitingForChoice = true;
                 wrapper.className = 'fade-item btn-container';
-                wrapper.innerHTML = `
-                    <button class="choice-btn btn-yes" onclick="selectBranch('branch_yes', this)">是</button>
-                    <button class="choice-btn btn-no" onclick="selectBranch('branch_no', this)">否</button>
-                `;
+                wrapper.innerHTML = `<button class="choice-btn btn-yes" onclick="selectBranch('branch_yes', this)">是</button><button class="choice-btn btn-no" onclick="selectBranch('branch_no', this)">否</button>`;
                 storyBody.appendChild(wrapper);
                 currentIndex++;
             } else {
-                if (step.type === "text") {
-                    wrapper.innerHTML = `<p class="story-text">${step.content}</p>`;
-                } else if (step.type === "highlight") {
-                    wrapper.innerHTML = `<p class="highlight-text">${step.content}</p>`;
-                } else if (step.type === "large") {
-                    wrapper.innerHTML = `<p class="mid-large-text">${step.content}</p>`;
-                } else if (step.type === "super-final") {
-                    wrapper.innerHTML = `<p class="super-final-text">${step.content}</p>`;
-                } else if (step.type === "image") {
-                    wrapper.innerHTML = `
-                        <div class="image-container">
-                            <img src="${step.content}" alt="故事插圖">
-                        </div>
-                    `;
-                }
-                
+                if (step.type === "text") wrapper.innerHTML = `<p class="story-text">${step.content}</p>`;
+                else if (step.type === "highlight") wrapper.innerHTML = `<p class="highlight-text">${step.content}</p>`;
+                else if (step.type === "large") wrapper.innerHTML = `<p class="mid-large-text">${step.content}</p>`;
+                else if (step.type === "super-final") wrapper.innerHTML = `<p class="super-final-text">${step.content}</p>`;
+                else if (step.type === "image") wrapper.innerHTML = `<div class="image-container"><img src="${step.content}" alt="故事插圖"></div>`;
                 storyBody.appendChild(wrapper);
                 currentIndex++;
             }
-
             setTimeout(() => {
                 wrapper.classList.add('visible');
                 window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
@@ -400,22 +363,16 @@
             const textSelected = btnElement.innerText;
             const container = btnElement.parentElement;
             container.innerHTML = `<p class="choice-selected">（小芸內心作出的決定：${textSelected}）</p>`;
-            
             currentPath = branchName;
             currentIndex = 0;
             isWaitingForChoice = false;
-            
             showNextStep();
         }
 
-        /* 🆕 新增：點擊播放鍵後的驅動機制 */
         function startGame(event) {
-            event.stopPropagation(); // 阻止事件干擾
-            document.getElementById('cover-screen').classList.add('hidden'); // 淡出隱藏封面
-            
-            showNextStep(); // 秀出第一句故事文字
-            
-            // 延遲 100 毫秒再啟動螢幕全域點擊，避免當次點擊造成故事暴衝跑兩句
+            event.stopPropagation();
+            document.getElementById('cover-screen').classList.add('hidden');
+            showNextStep();
             setTimeout(() => {
                 document.addEventListener('click', showNextStep);
             }, 100);
